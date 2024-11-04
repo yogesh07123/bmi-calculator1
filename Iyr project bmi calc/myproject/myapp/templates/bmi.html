@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator and Diet Planner</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo', sans-serif;
+            line-height: 1.6;
+        } 
+ 
+        .area {
+            background: #4e54c8;  
+            background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        header {
+            background-color: #1c1a1a;
+            color: rgb(255, 253, 253);
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        header nav {
+            margin-top: 1rem;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        main {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: #090909;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 0.5rem 0 0.25rem;
+        }
+
+        input, select, textarea {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background-color: #4CAF50; 
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color:#45a049 ;   
+            transform: translateY(-2px);
+        }
+
+        .btn-3d {
+            position: relative;
+            background-color:#4CAF50 ;     
+            color: rgb(255, 255, 255);
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px #45a049;
+        }
+
+        .btn-3d:hover {
+            background-color: #45a049;
+            transform: translateY(2px);
+            box-shadow: 0 2px #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-content p, .footer-content a {
+            margin: 0.25rem 0;
+        }
+
+        .footer-icons {
+            margin-top: 1rem;
+        }
+
+        .footer-icons a {
+            margin: 0 0.5rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .footer-icons a:hover {
+            color: #4CAF50;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <header>
+        <h1>BMI Calculator and Diet Planner</h1>
+        <nav>
+            <a href="{% url 'main_page2' %}">Home</a>
+            <a href="https://www.who.int/europe/news-room/fact-sheets/item/a-healthy-lifestyle---who-recommendations">Health Tips</a>
+            <a href="mailto:vrishikrishnan@gmail.com">Contact</a>
+        </nav>
+    </header>
+    <main>       
+
+        <section id="bmi-calculator">
+            <h2>BMI Calculator</h2>
+            <form id="bmi-form" method="post" action="">
+                {% csrf_token %}
+                <select id="gender" name="gender" value={{gender}} required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" value={{age}} required>
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" value={{height}} required>
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" value={{weight}} required>
+                
+                <button type="submit" class="btn-3d">Calculate BMI</button>
+            </form>
+            <p id="bmi-result" value = {{bmi}}></p>
+        </section>
+        <section id="diet-planner">
+            <h2>Diet Planner</h2>
+            <label for="bmi">Last BMI:</label>
+            <input type="text" id="last_bmi" name="last_bmi" value={{last_bmi}} readonly>
+                <label for="bmi">Your BMI:</label>
+                <input type="text" id="bmi" name="bmi" value={{bmi}} readonly>
+                <label for="diet">Recommended Diet:</label>
+                <textarea id="diet" name="diet" rows="5" readonly></textarea>
+                <button type="submit" class="btn-3d"onclick ="generateDietPlan()"  >Get Diet Plan</button>
+            
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>Contact us at: <a href="mailto:vrishikrishnan@gmail.com">vrishikrishnan@gmail.com</a></p>
+        </div>
+        <div class="footer-icons">
+            <a href="https://www.instagram.com/braverishi/?hl=en" target="_blank">Instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value) / 100;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const bmiResultElement = document.getElementById('bmi-result');
+            const bmiInputElement = document.getElementById('bmi');
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0 || isNaN(age) || gender === "") {
+                bmiResultElement.innerText = 'Please enter valid values for all fields.';
+                bmiInputElement.value = '';
+                return;
+            }
+
+            const bmi = weight / (height * height);
+            bmiResultElement.innerText = `Your BMI is ${bmi.toFixed(2)}`;
+            bmiInputElement.value = bmi.toFixed(2);
+        }
+
+        function generateDietPlan() {
+    const bmi = parseFloat(document.getElementById('bmi').value);
+    const age = parseInt(document.getElementById('age').value);
+    const gender = document.getElementById('gender').value;
+    let dietPlan = '';
+
+    if (isNaN(bmi)) {
+        dietPlan = 'Please calculate your BMI first.';
+    } else if (bmi < 18.5) {
+        dietPlan = 'Your BMI indicates that you are underweight. A diet rich in proteins, healthy fats, and complex carbohydrates is recommended.';
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+        dietPlan = 'Your BMI is normal. Maintain a balanced diet including a variety of nutrients.';
+    } else if (bmi >= 25 && bmi < 29.9) {
+        dietPlan = 'Your BMI indicates that you are overweight. A diet with reduced calories, more fruits and vegetables, and regular exercise is recommended.';
+    } else {
+        dietPlan = 'Your BMI indicates that you are obese. A strict diet plan under the guidance of a healthcare provider is recommended.';
+    }
+
+    document.getElementById('diet').value = dietPlan;
+}
+
+    </script>
+</body>
+</html>
